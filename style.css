@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
+
+body {
+    font-family: 'Noto Sans Thai', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+header {
+    font-family: 'Noto Sans Thai', sans-serif;
+    background-color: #800000;
+    color: #ffffff;
+    text-align: center;
+    padding: 1px;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    max-height: 75px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    border-radius: 30%;
+    background-color: white;
+    padding: 5px;
+}
+
+header h1 {
+    font-size: 25px;
+}
+
+.search-form {
+    background-color: #f5f5f5;
+    padding: 15px;
+    margin: 50px auto 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: auto;
+}
+
+.search-form h3 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.flex-container1,
+.flex-container2 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.dropdowns {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.section {
+    text-align: left;
+}
+
+.custom-section1 {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.seach_text {
+    margin-right: 10px;
+    width: 50%;
+}
+
+.custom-section1 h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.custom-section1 input,
+.custom-section1 select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.button button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button button:hover {
+    background-color: #009dff;
+}
+
+
+footer {
+    margin-top: 50px;
+    padding: 15px;
+    color: rgb(57, 50, 50);
+    text-align: center;
+}
+
+.container {
+    margin-top: 4rem;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.thead-dark {
+    color: #fff;
+    background-color: #343a40;
+}
+
+th, td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+#licenseTable {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .flex-container1, .flex-container2 {
+        flex-direction: column;
+    }
+
+    .dropdowns {
+        margin-right: 0;
+    }
+}
+

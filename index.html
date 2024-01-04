@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBTC|Seach telecom license</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" href="https://searchtelecomlicense.nbtc.go.th/assets/images/logo.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-5SL8C1NS+0OnarvC1FCEVThp89CcxjnyPXJn+9AjKJL4vwf0Z6OvOfLdWxNNBFixfSht+ZQaGq9tPbzJ0dmMw==" crossorigin="anonymous" />
+    <script src="Javascript\server.js"></script>
+    <script>
+          document.addEventListener('DOMContentLoaded', function () {
+          document.getElementById('filterBtn').addEventListener('click', function () {
+            var COMPANY_FULL_NAME = document.getElementById('COMPANY_FULL_NAME_INPUT').value;
+            var LICENSE_TYPE = document.getElementById('LICENSE_TYPE').value;
+            var LICENSE_SERVICE_DESCRIPTION = document.getElementById('LICENSE_SERVICE_DESCRIPTION').value;
+            var EFFECTIVE_YEAR = document.getElementById('EFFECTIVE_YEAR').value;
+            var REMARK = document.getElementById('REMARK').value;
+            var connectionString = {
+                server: '172.17.63.63',
+                port: '1433',
+                user: 'blockchainViewOnlyUser',
+                password: 'blockchainViewOnlyP@ssw0rd!2024',
+                database: 'your_database_name'
+            };
+
+            var url = 'http://localhost:3000/your_api_endpoint';
+            var requestObject = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+                body: JSON.stringify({
+                    COMPANY_FULL_NAME: COMPANY_FULL_NAME,
+                    LICENSE_TYPE: LICENSE_TYPE,
+                    LICENSE_SERVICE_DESCRIPTION: LICENSE_SERVICE_DESCRIPTION,
+                    EFFECTIVE_YEAR: EFFECTIVE_YEAR,
+                    REMARK: REMARK
+                })
+            };
+
+            fetch(url, requestObject)
+                .then(response => response.json())
+                .then(data => {
+                // แสดงข้อมูลในตาราง
+                   displayDataInTable(data);
+                })
+                    .catch(error => {
+                    console.error('เกิดข้อผิดพลาดในการเชื่อมต่อ:', error);
+                });
+        });
+
+        function displayDataInTable(data) {
+            const tableBody = document.querySelector('#licenseTable tbody');
+            tableBody.innerHTML = '';
+            data.forEach(rowData => {
+                const row = document.createElement('tr');
+                Object.values(rowData).forEach(value => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+                tableBody.appendChild(row);
+            });
+        }
+    });
+  </script>
+
+
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <img src="https://searchtelecomlicense.nbtc.go.th/assets/images/logo.png" alt="Logo" class="header-logo">
+            <h1>สำนักงานคณะกรรมการกิจการกระจายเสียง กิจการโทรทัศน์ และกิจการโทรคมนาคมแห่งชาติ</h1>
+        </div>
+    </header>
+
+    <div class="search-form">
+        <h3>รายชื่อผู้ได้รับใบอนุญาตประกอบกิจการโทรคมนาคม</h3>
+    
+        <div class="flex-container1">
+          <div class="seach_text"> 
+          <div class="section custom-section1">
+              <h2>ชื่อผู้รับอนุญาต</h2>
+              <input type="text" id="COMPANY_FULL_NAME_INPUT" placeholder="ชื่อผู้รับอนุญาต">
+            </div></div>
+          <div class="dropdowns">
+            <div class="section custom-section1">
+              <h2>ประเภทใบอนุญาต</h2>
+              <select id="LICENSE_TYPE">
+                <option value="เลือกประเภทใบอนุญาต">เลือกประเภทใบอนุญาต</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex-container2">
+        <div class="dropdowns">
+          <div class="section custom-section1">
+            <h2>บริการที่ได้รับอนุญาต</h2>
+            <select id="LICENSE_SERVICE_DESCRIPTION">
+              <option value="เลือกบริการที่ได้รับอนุญาต">เลือกบริการที่ได้รับอนุญาต</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    
+        <div class="flex-container1">
+          <div class="dropdowns">
+            <div class="section custom-section1">
+              <h2>ปีที่ได้รับอนุญาต</h2>
+              <select id="EFFECTIVE_YEAR">
+                <option value="เลือกปีที่ได้รับอนุญาต">เลือกปีที่ได้รับอนุญาต</option>
+              </select>
+            </div>
+          </div>
+    
+          <div class="dropdowns">
+            <div class="section custom-section1">
+              <h2>สถานะใบอนุญาต</h2>
+              <select id="REMARK">
+                <option value="ผู้รับใบอนุญาตปัจจุบัน">ผู้รับใบอนุญาตปัจจุบัน</option>
+              </select>
+            </div>
+          </div>
+        </div>
+    
+        <div class="button">
+          <button id="filterBtn">ค้นหา</button>
+       </div>
+      </div>
+    
+      <div class="table-container">
+        <table id="licenseTable">
+            <thead>
+                <tr>
+                    <th>ชื่อบริษัท</th>
+                    <th>ประเภทใบอนุญาต</th>
+                    <th>บริการที่ได้รับอนุญาต</th>
+                    <th>เลขที่ใบอนุญาต</th>
+                    <th>ปีที่ได้รับอนุญาต</th>
+                    <th>วันที่ได้รับอนุญาต</th>
+                    <th>วันที่ใบอนุญาตหมดอายุ</th>
+                    <th>ใบอนุญาต</th>
+                    <th>หมายเหตุ</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+      </div>
+
+    <footer>
+        Copyright © 2022 Information Technology @ NBTC
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        fetch('http://localhost:3000/getDropdownData')
+          .then(response => response.json())
+          .then(data => {
+            const dropdown = document.getElementById('COMPANY_FULL_NAME_DROPDOWN');
+            data.forEach(optionData => {
+              const option = document.createElement('option');
+              option.value = optionData.COMPANY_FULL_NAME;
+              option.textContent = optionData.COMPANY_FULL_NAME;
+              dropdown.appendChild(option);
+            });
+          })
+          .catch(error => {
+            console.error('เกิดข้อผิดพลาดในการดึงข้อมูล dropdowns:', error);
+          });
+    
+
+          const input = document.getElementById('COMPANY_FULL_NAME_INPUT');
+            input.addEventListener('input', function () {
+          const inputValue = input.value.toLowerCase();
+          const dropdown = document.getElementById('COMPANY_FULL_NAME_DROPDOWN');
+            Array.from(dropdown.options).forEach(option => {
+              const optionText = option.value.toLowerCase();
+                if (optionText.includes(inputValue)) {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        });
+      });
+    </script>
+
+</body>
+
+</html>
